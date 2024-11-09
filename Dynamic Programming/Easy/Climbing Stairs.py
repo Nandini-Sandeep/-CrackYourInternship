@@ -1,20 +1,7 @@
 class Solution:
-    def climbStairs(self, n: int, D={}) -> int:
-        print("doing",n)
-        if n<=3:
-            D[n]=n
-            return n
-        a, b = n-1, n-2
-        if a in D and b in D:
-            D[n] = D[a] + D[b]
-            return D[n]
-        if a in D: 
-            # b not in D
-            D[n] = D[a] + self.climbStairs(b,D)
-            return D[n]
-        if b in D: 
-            # a not in D
-            D[n] = self.climbStairs(a,D) + D[b]
-            return D[n]
-        else:
-            return self.climbStairs(n-1,D) + self.climbStairs(n-2,D)
+    def climbStairs(self, n: int) -> int:
+        steps = [0]*(n+1)
+        for i in range(1,n+1):
+            if i<3: steps[i] = i
+            else: steps[i] = steps[i-1] + steps[i-2]
+        return steps[n]
